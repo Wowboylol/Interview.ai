@@ -1,4 +1,5 @@
 import { useState, useRef } from "react";
+import { useNavigate} from "react-router-dom"
 import { startInterview } from "../services/userService";
 import Snackbar from "../components/snackbar";
 
@@ -8,14 +9,14 @@ function Create() {
     position: "",
     technologies: "",
   });
-
   const SnackbarType = {
     success: "success",
     fail: "fail",
   };
-
   const snackbarRef = useRef(null);
-
+  const navigate = useNavigate();
+  const home = "/";
+  const practice = "/practice";
   function displaySnackbar() {
     if (
       prompt.name === "" ||
@@ -24,13 +25,15 @@ function Create() {
     ) {
       snackbarRef.current.show();
     } else {
+      const data = JSON.stringify(prompt);
+      navigate(practice);
       startInterview(prompt);
     }
   }
 
   return (
     <div className="flex min-h-screen flex-col items-center justify-center font-serif gap-8">
-      <h1 className="text-3xl">Fill in the boxes to create a prompt</h1>
+      <h1 className="text-3xl">Fill in the boxes to create a prompt for the interview</h1>
       <div>
         <div className="flex items-center pb-3">
           <label className="pr-4">Name:</label>
@@ -136,6 +139,14 @@ function Create() {
         message="One of the fields is not complete!"
         type={SnackbarType.fail}
       />
+      <button
+        className="border-2 border-black rounded-full shadow hover:shadow-md hover:opacity-50 p-4 transition duration-500"
+        onClick={() => {
+          navigate(home);
+        }}
+      >
+        Go back to the home page
+      </button>
     </div>
   );
 }

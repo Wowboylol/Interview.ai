@@ -1,6 +1,6 @@
-function Create() {
+function View() {
     return <div>IDK DO SOMETHING HERE TO VIEW SOMETHING</div>;
   }
   
-export default Create;
+export default View;
   
