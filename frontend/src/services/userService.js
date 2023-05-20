@@ -6,7 +6,7 @@ export async function startInterview(data)
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: data
+            body: JSON.stringify(data)
         })
         return await response.json();
     }

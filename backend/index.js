@@ -6,9 +6,10 @@ const app = express();
 const port = 4200;
 
 app.use(cors());
-// app.use(express.json());
+app.use(express.json());
 
 app.post('/api/start', async (req, res) => {
+    console.log(req.body);
     const response = await ai.initialize(req);
     res.status(200).json({
         message: response
