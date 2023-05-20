@@ -25,7 +25,6 @@ function Create() {
     ) {
       snackbarRef.current.show();
     } else {
-      const data = JSON.stringify(prompt);
       navigate(practice);
       startInterview(prompt);
     }
