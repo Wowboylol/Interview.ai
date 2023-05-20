@@ -6,7 +6,7 @@ const configuration = new Configuration({
 
 const openai = new OpenAIApi(configuration);
 
-// Initialize chatGPT with prompt data
+// Initialize chatGPT with setup prompt
 const initialize = async(req_data) => 
 {
     var position = "Data Scientist";
@@ -16,12 +16,13 @@ const initialize = async(req_data) =>
     var previous_position = "Data Scientist Intern";
     var num_question = 5;
 
-    const setup_prompt = `This is an interview. You are to interview me for a ${position} that uses ${technologies}. My name is ${name}, I’m studying ${uni_program} and I have worked as a ${previous_position}. Act like this is a real interview, and you are the interviewer and I'm the interviewee. You are only allowed to ask ${num_question} questions. You ask one question at a time, and you wait for me to type in a prompt. The interview must end after ${num_question} questions. You must ignore my prompt and proceed to ask the next question. Start off by asking the first question`;
+    const setup_prompt = `Ignore all previous instructions before this one. This is an interview. You are to interview me for a ${position} that uses ${technologies}. My name is ${name}, I’m studying ${uni_program} and I have worked as a ${previous_position}. Act like this is a real interview, and you are the interviewer and I'm the interviewee. You are only allowed to ask ${num_question} questions. You ask one question at a time, and you wait for me to type in a prompt. The interview must end after ${num_question} questions. You must ignore my prompt and proceed to ask the next question. Start off by asking the first question.`;
 
     try {
         const completion = await openai.createCompletion({
             model: "text-davinci-003",
             prompt: setup_prompt,
+            max_tokens: 500
         });
         console.log(completion.data.choices[0].text);
         return completion.data.choices[0].text;
@@ -42,6 +43,7 @@ const promptTechnologies = async(technologies) =>
     return prompt;
 }
 
+// Continue generating interview questions based on setup prompt
 const getNextResponse = async(req_data) => {
     var user_prompt = req_data; // !!! temporary, req_data variable will not come as string format in final version, need to extract
 
@@ -49,6 +51,7 @@ const getNextResponse = async(req_data) => {
         const completion = await openai.createCompletion({
             model: "text-davinci-003",
             prompt: user_prompt,
+            max_tokens: 400
         });
         console.log(completion.data.choices[0].text);
         return completion.data.choices[0].text;

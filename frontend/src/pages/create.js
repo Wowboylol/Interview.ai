@@ -1,5 +1,6 @@
 import { useState, useRef } from "react";
 import { useNavigate} from "react-router-dom"
+import { startInterview } from "../services/userService";
 import Snackbar from "../components/snackbar";
 
 function Create() {
@@ -26,6 +27,7 @@ function Create() {
     } else {
       const data = JSON.stringify(prompt);
       navigate(practice);
+      startInterview(prompt);
     }
   }
 
