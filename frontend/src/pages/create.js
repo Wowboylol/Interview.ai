@@ -1,4 +1,5 @@
 import { useState, useRef } from "react";
+import { startInterview } from "../services/userService";
 import Snackbar from "../components/snackbar";
 
 function Create() {
@@ -23,7 +24,7 @@ function Create() {
     ) {
       snackbarRef.current.show();
     } else {
-      const data = JSON.stringify(prompt);
+      startInterview(prompt);
     }
   }
 
