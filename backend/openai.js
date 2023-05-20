@@ -42,6 +42,23 @@ const promptTechnologies = async(technologies) =>
     return prompt;
 }
 
+const getNextResponse = async(req_data) => {
+    var user_prompt = req_data; // !!! temporary, req_data variable will not come as string format in final version, need to extract
+
+    try {
+        const completion = await openai.createCompletion({
+            model: "text-davinci-003",
+            prompt: user_prompt,
+        });
+        console.log(completion.data.choices[0].text);
+        return completion.data.choices[0].text;
+    }
+    catch(err) {
+        console.log(err);
+    }
+}
+
 module.exports = {
-    initialize
+    initialize,
+    getNextResponse
 };
