@@ -11,11 +11,6 @@ app.get('/api/start', async (req, res) => {
     res.send(response);
 });
 
-app.get('/api/prompt', async (req, res) => {
-    const response = await ai.test();
-    res.send(response);
-});
-
 app.listen(port, () => {
     console.log(`App is running on port ${port}`);
 });
