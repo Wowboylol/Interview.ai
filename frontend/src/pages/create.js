@@ -22,6 +22,8 @@ function Create() {
       prompt.technologies === ""
     ) {
       snackbarRef.current.show();
+    } else {
+      const data = JSON.stringify(prompt);
     }
   }
 
