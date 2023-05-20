@@ -6,7 +6,7 @@ const configuration = new Configuration({
 
 const openai = new OpenAIApi(configuration);
 
-// Initialize chatGPT with prompt data
+// Initialize chatGPT with setup prompt
 const initialize = async(req_data) => 
 {
     var position = "Data Scientist";
@@ -43,6 +43,7 @@ const promptTechnologies = async(technologies) =>
     return prompt;
 }
 
+// Continue generating interview questions based on setup prompt
 const getNextResponse = async(req_data) => {
     var user_prompt = req_data; // !!! temporary, req_data variable will not come as string format in final version, need to extract
 
