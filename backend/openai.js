@@ -6,6 +6,30 @@ const configuration = new Configuration({
 
 const openai = new OpenAIApi(configuration);
 
+const initialize = async(req_data) => {
+
+    var position = "Data Scientist";
+    var name = "Steven";
+    var technologies = [];
+    var uni_program = "Bachelor of Science in Statistics";
+    var previous_position = "Data Scientist Intern";
+    var num_question = 5;
+
+    var setup_prompt = `This is an interview. You are to interview me for a ${position} that uses ${technologies}. My name is ${name}, I’m studying ${uni_program} and I have worked as a ${previous_position}. Act like this is a real interview, and you are the interviewer and I'm the interviewee. You are only allowed to ask ${num_question} questions. You ask one question at a time, and you wait for me to type in a prompt. The interview must end after ${num_question} questions. You must ignore my prompt and proceed to ask the next question. Start off by asking the first question`;
+
+    try {
+        const completion = await openai.createCompletion({
+            model: "text-davinci-003",
+            prompt: setup_prompt,
+        });
+        console.log(completion.data.choices[0].text);
+        return completion.data.choices[0].text;
+    }
+    catch(err) {
+        console.log(err);
+    }
+}
+
 const test = async() => {
     try {
         const completion = await openai.createCompletion({
@@ -21,5 +45,6 @@ const test = async() => {
 }
 
 module.exports = {
-    test
+    test,
+    initialize
 };
