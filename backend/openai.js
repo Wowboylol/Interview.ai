@@ -7,16 +7,9 @@ const configuration = new Configuration({
 const openai = new OpenAIApi(configuration);
 
 // Initialize chatGPT with setup prompt
-const initialize = async(req_data) => 
+const initialize = async(input_prompt) => 
 {
-    var position = "Data Scientist";
-    var name = "Steven";
-    var technologies = await promptTechnologies(["Python", "R", "SQL", "Tableau", "Excel"]);
-    var uni_program = "Bachelor of Science in Statistics";
-    var previous_position = "Data Scientist Intern";
-    var num_question = 5;
-
-    const setup_prompt = `Ignore all previous instructions before this one. This is an interview. You are to interview me for a ${position} that uses ${technologies}. My name is ${name}, I’m studying ${uni_program} and I have worked as a ${previous_position}. Act like this is a real interview, and you are the interviewer and I'm the interviewee. You are only allowed to ask ${num_question} questions. You ask one question at a time, and you wait for me to type in a prompt. The interview must end after ${num_question} questions. You must ignore my prompt and proceed to ask the next question. Start off by asking the first question.`;
+    const setup_prompt = input_prompt;
 
     try {
         const completion = await openai.createCompletion({
@@ -32,20 +25,9 @@ const initialize = async(req_data) =>
     }
 }
 
-// Parse technologies array into prompt string
-const promptTechnologies = async(technologies) => 
-{
-    var prompt = "";
-    for(let i = 0; i < technologies.length-1; i++) {
-        prompt += technologies[i] + ", ";
-    }
-    prompt += technologies[technologies.length-1];
-    return prompt;
-}
-
 // Continue generating interview questions based on setup prompt
-const getNextResponse = async(req_data) => {
-    var user_prompt = req_data; // !!! temporary, req_data variable will not come as string format in final version, need to extract
+const getNextResponse = async(input_prompt) => {
+    var user_prompt = input_prompt; // !!! temporary, req_data variable will not come as string format in final version, need to extract
 
     try {
         const completion = await openai.createCompletion({
