@@ -16,12 +16,33 @@ const initialize = async(position, name, job_reqs) =>
         are the interviewer and I'm the interviewee. Your only task is to generate 5 questions 
         MAX that you would ask an interviewee to ensure they are a good fit based on the 
         previous information. Do not respond to the questions you generated.`;
-    memory += setup_prompt;
+    appendToMemory(setup_prompt);
 
     try {
         const completion = await openai.createCompletion({
             model: "text-davinci-003",
             prompt: setup_prompt,
+            max_tokens: 500
+        });
+        console.log(completion.data.choices[0].text);
+        appendToMemory(" Here is the chat log so far: You: " + completion.data.choices[0].text + " ");
+        return parseResponse(completion.data.choices[0].text);
+    }
+    catch(err) {
+        console.log(err);
+    }
+}
+
+const getFollowUp = async(question) => 
+{
+    const setup_prompt = `You now have to ask 
+    this question: ${question}, word for word. You must not reply to the question. Then, you must ask at least and at most one follow-up question 
+    to the response. After the user responds to the follow-up question you must end the conversation. `;
+
+    try {
+        const completion = await openai.createCompletion({
+            model: "text-davinci-003",
+            prompt: memory + setup_prompt,
             max_tokens: 500
         });
         console.log(completion.data.choices[0].text);
@@ -46,16 +67,18 @@ const parseResponse = (response) => {
 }
 
 // Continue generating interview questions based on setup prompt
-const getNextResponse = async(input_prompt) => {
-    var user_prompt = input_prompt; // !!! temporary, req_data variable will not come as string format in final version, need to extract
-
+const getNextQuestion = async() => {
     try {
         const completion = await openai.createCompletion({
             model: "text-davinci-003",
-            prompt: user_prompt,
+            prompt: memory + "Provide the user with the next question please.",
             max_tokens: 400
         });
         console.log(completion.data.choices[0].text);
+        appendToMemory("You: " + completion.data.choices[0].text);
+
+        // APPEND USER INPUT TO MEMORY HERE
+
         return completion.data.choices[0].text;
     }
     catch(err) {
@@ -65,7 +88,7 @@ const getNextResponse = async(input_prompt) => {
 
 // Append given string to memory
 const appendToMemory = (str) => {
-    memory += str;
+    memory += " " + str + " ";
 }
 
 // Get memory
@@ -80,8 +103,9 @@ const clearMemory = () => {
 
 module.exports = {
     initialize,
-    getNextResponse,
+    getNextQuestion,
     appendToMemory,
     getMemory,
-    clearMemory
+    clearMemory,
+    getFollowUp
 };

@@ -1,16 +1,23 @@
-import React from "react";
+import { React, useState } from "react";
 import SpeechRecognition, {
   useSpeechRecognition,
 } from "react-speech-recognition";
 import { createSpeechlySpeechRecognition } from "@speechly/speech-recognition-polyfill";
+import { useLocation, useNavigate } from "react-router-dom";
 
 // const appId = process.env.REACT_APP_SECRET;
 const appId = "7fd27f79-99ff-4484-879a-5b776ba182d1";
 const SpeechlySpeechRecognition = createSpeechlySpeechRecognition(appId);
 SpeechRecognition.applyPolyfill(SpeechlySpeechRecognition);
 let waiting = true;
+const results = "/results"
 
 function Practice() {
+  const location = useLocation();
+  const [index, setIndex] = useState(0);
+  const navigate = useNavigate();
+  let finished = false;
+  const data = location.state["data"]["message"];
   const {
     transcript,
     listening,
@@ -32,6 +39,18 @@ function Practice() {
     waiting = false;
   }
 
+  function nextQuestion() {
+    setIndex(index + 1);
+    if (index === data.length - 1) {
+      finished = true;
+    }
+    if (finished) {
+      navigate(results);
+    }
+    console.log(finished);
+    resetTranscript();
+  }
+
   return (
     // <div>
     //   <p>Microphone: {listening ? "on" : "off"}</p>
@@ -44,19 +63,27 @@ function Practice() {
     //   <button onClick={resetTranscript}>Reset</button>
     //   <p>{transcript}</p>
     // </div>
-    <div className="flex min-h-screen flex-col items-center justify-center font-serif gap-8">
-      {waiting ? (
-        <button
-          className="border-2 border-black rounded-full shadow hover:shadow-md hover:opacity-50 p-4 transition duration-500"
-          onClick={startInterview}
-        >
-          Click here to start the practice interview
-        </button>
-      ) : (
-        <p>
-          {transcript}
-        </p>
-      )}
+    <div>
+      {waiting ? 
+        <div className="flex min-h-screen flex-col items-center justify-center font-serif gap-4">
+          <button
+            className="border-2 border-black rounded-full shadow hover:shadow-md hover:opacity-50 p-4 transition duration-500"
+            onClick={startInterview}
+          >
+            Click here to start the practice interview
+          </button>
+          <p>Good luck!</p>
+        </div> : 
+        <div className="text-center flex flex-col items-center gap-10 font-serif text-bold">
+          <h1 className="pt-10 text-3xl">{data[index]}</h1>
+          <p className="text-x w-2/3">{transcript}</p>
+          <button
+            className="border-2 border-black rounded-full shadow hover:shadow-md hover:opacity-50 p-4 transition duration-500"
+            onClick={nextQuestion}
+          >
+            Click when you have finished your answer
+          </button>
+        </div>}
     </div>
   );
 }
