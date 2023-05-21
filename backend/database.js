@@ -64,6 +64,12 @@ var addPrompt = async (user_id, name, position, job_reqs) => {
     }
 };
 
+// Get all prompts based on user_id
+// Returns an array of prompts
+var getPrompts = async (user_id) => {
+    return await Prompt.find({user_id: user_id});
+}
+
 // Returns true if user exists already
 var userExists = async (email) => {
     return await User.findOne({email: email});
@@ -88,8 +94,13 @@ var addUser = async(email, password) => {
 };
 
 // addPrompt("5f9e9b1b1c9d440000d1e0b0", "Test Prompt", "Test Position", "Test Job Reqs")
+// (async () => {
+//     var prompts = await getPrompts("5f9e9b1b1c9d440000d1e0b0");
+//     console.log(prompts);
+// })();
 
 module.exports = {
     login,
-    addPrompt
+    addPrompt,
+    getPrompts,
 };

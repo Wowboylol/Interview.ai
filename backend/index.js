@@ -72,6 +72,12 @@ app.post('/api/create-prompt', async (req,res) => {
     }
 });
 
+app.get('/api/view-prompts', async (req,res) => {
+    var user_id = req.session.user.id;
+    var prompts = await db.getPrompts(user_id);
+    res.json(prompts);
+});
+
 app.post('/api/start', async (req, res) => {
     console.log(req.body);
     ai.clearMemory();
