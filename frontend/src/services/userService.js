@@ -1,5 +1,3 @@
-import { login } from "../../../backend/database";
-
 export async function startInterview(data)
 {
     try {
@@ -50,7 +48,7 @@ export async function loadPrompt(data)
     }
 }
 
-export async function login(data)
+export async function loginAPI(data)
 {
     try {
         const response = await fetch('http://localhost:4200/api/login', {
