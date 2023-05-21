@@ -4,6 +4,7 @@ import SpeechRecognition, {
 } from "react-speech-recognition";
 import { createSpeechlySpeechRecognition } from "@speechly/speech-recognition-polyfill";
 import { useLocation, useNavigate } from "react-router-dom";
+import Webcam from "react-webcam";
 
 // const appId = process.env.REACT_APP_SECRET;
 const appId = "7fd27f79-99ff-4484-879a-5b776ba182d1";
@@ -16,6 +17,7 @@ let waiting = true;
 function Practice() {
   const location = useLocation();
   const [index, setIndex] = useState(0);
+  const [loader, setLoader] = useState(true);
   const navigate = useNavigate();
   let finished = false;
   const data = location.state["data"]["message"];
@@ -50,9 +52,13 @@ function Practice() {
     if (finished) {
       SpeechRecognition.stopListening();
       waiting = true;
-      navigate(results, {state: {data, responses}});
+      navigate(results, { state: { data, responses } });
     }
     resetTranscript();
+  }
+
+  function handleLoader() {
+    setLoader(!loader);
   }
 
   return (
@@ -68,7 +74,7 @@ function Practice() {
     //   <p>{transcript}</p>
     // </div>
     <div>
-      {waiting ? 
+      {waiting ? (
         <div className="flex min-h-screen flex-col items-center justify-center font-serif gap-4 font-semibold">
           <button
             className="border-2 border-black rounded-full shadow hover:shadow-md hover:opacity-50 p-4 transition duration-500"
@@ -77,9 +83,23 @@ function Practice() {
             Click here to start the practice interview
           </button>
           <p>Good luck!</p>
-        </div> : 
+        </div>
+      ) : (
         <div className="text-center flex flex-col items-center gap-10 font-serif text-bold font-semibold">
           <h1 className="pt-10 text-3xl">{data[index]}</h1>
+          {loader ? (
+            <div
+              class="inline-block h-8 w-8 animate-spin rounded-full border-4 border-solid border-current border-r-transparent align-[-0.125em] motion-reduce:animate-[spin_1.5s_linear_infinite]"
+              role="status"
+            >
+              <span class="!absolute !-m-px !h-px !w-px !overflow-hidden !whitespace-nowrap !border-0 !p-0 ![clip:rect(0,0,0,0)]">
+                Loading...
+              </span>
+            </div>
+          ) : (
+            <div> </div>
+          )}
+          <Webcam height="200" width="400" onUserMedia={handleLoader} />
           <p className="text-x w-2/3">{transcript}</p>
           <button
             className="border-2 border-black rounded-full shadow hover:shadow-md hover:opacity-50 p-4 transition duration-500"
@@ -87,7 +107,8 @@ function Practice() {
           >
             Click when you have finished your answer
           </button>
-        </div>}
+        </div>
+      )}
     </div>
   );
 }

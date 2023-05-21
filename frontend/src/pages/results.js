@@ -30,7 +30,7 @@ function Results() {
       <h1 className="text-xl pb-10">
         Here's a recap of your answers to the following questions!
       </h1>
-      <div className="border-solid border-2 px-2 border-black flex flex-col gap-10 w-2/5 h-80 overflow-auto">
+      <div className="border-solid border-2 rounded-lg px-2 border-black flex flex-col gap-10 w-2/5 h-80 overflow-auto bg-white">
         <div className="text-center">{currentQuestion}</div>
         <div className="break-normal">
           {currentAnswer}
