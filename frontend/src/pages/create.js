@@ -17,7 +17,7 @@ function Create() {
   const navigate = useNavigate();
   const home = "/";
   const practice = "/practice";
-  function displaySnackbar() {
+  async function displaySnackbar() {
     if (
       prompt.name === "" ||
       prompt.position === "" ||
@@ -25,8 +25,9 @@ function Create() {
     ) {
       snackbarRef.current.show();
     } else {
-      navigate(practice);
-      startInterview(prompt);
+      const data = await startInterview(prompt);
+      console.log(data);
+      navigate(practice, {state: {data}});
     }
   }
 

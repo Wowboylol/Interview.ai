@@ -3,6 +3,7 @@ import SpeechRecognition, {
   useSpeechRecognition,
 } from "react-speech-recognition";
 import { createSpeechlySpeechRecognition } from "@speechly/speech-recognition-polyfill";
+import {useLocation} from 'react-router-dom';
 
 // const appId = process.env.REACT_APP_SECRET;
 const appId = "7fd27f79-99ff-4484-879a-5b776ba182d1";
@@ -11,6 +12,7 @@ SpeechRecognition.applyPolyfill(SpeechlySpeechRecognition);
 let waiting = true;
 
 function Practice() {
+  const location = useLocation();
   const {
     transcript,
     listening,
