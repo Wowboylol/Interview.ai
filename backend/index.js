@@ -19,14 +19,14 @@ app.use(session({
 }));
 
 function isLoggedIn(req,res,next){
-    if (req.session.user){
+    if(req.session.user){
         return next()
     }
-    res.redirect('/auth');
+    res.status(401).json({session: false});
 }
 
 app.get('/auth', isLoggedIn, (req,res) => {
-    res.redirect('/view-prompts');
+    res.status(200).json({session: true});
 })
 
 app.post('/api/login', async (req,res) => {
@@ -35,11 +35,11 @@ app.post('/api/login', async (req,res) => {
     
     var user = await db.login(email, password);
     if(!user) {
-        console.log("INVALID LOGIN");
-        res.status(401).send("Invalid login");
+        res.status(400).json({
+            message: "Invalid login"
+        })
     }
     else if(user) {
-        console.log("SUCCESSFUL LOGIN", user);
         req.session.user = {id: user._id, email: email };
         req.session.regenerate(function (err) {
             if (err) next(err)
@@ -48,7 +48,9 @@ app.post('/api/login', async (req,res) => {
               if (err) return next(err)
             });
         });
-        res.status(200).send("Successful login");
+        res.status(200).json({
+            message: "Login successful"
+        })
     }
 });
 

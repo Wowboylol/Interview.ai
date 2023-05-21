@@ -64,3 +64,19 @@ export async function loginAPI(data)
         console.log(err);
     }
 }
+
+export async function checkSession()
+{
+    try {
+        const response = await fetch('http://localhost:4200/auth', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        return await response.json();
+    }
+    catch(err) {
+        console.log(err);
+    }
+}
