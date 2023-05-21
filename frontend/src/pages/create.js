@@ -31,7 +31,7 @@ function Create() {
   }
 
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center font-serif gap-8">
+    <div className="flex min-h-screen flex-col items-center justify-center font-serif font-semibold gap-8">
       <h1 className="text-3xl">
         Fill in the boxes to create a prompt for the interview
       </h1>

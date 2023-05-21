@@ -6,7 +6,7 @@ function Home() {
   const view = "/view";
 
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center gap-8 font-serif">
+    <div className="flex min-h-screen flex-col items-center justify-center gap-8 font-serif font-semibold">
       <h1 className="text-4xl text-center justify-center">Interview.ai</h1>
       <p> An application that allows you to practice for your important interviews</p>
       <div className="pt-4 space-x-12">
