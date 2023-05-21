@@ -10,6 +10,7 @@ app.use(express.json());
 
 app.post('/api/start', async (req, res) => {
     console.log(req.body);
+    ai.clearMemory();
     const response = await ai.initialize(req.body.position, req.body.name, req.body.technologies);
     ai.appendToMemory(" Here is the chat log so far: You: " + response + " ");
     res.status(200).json({
