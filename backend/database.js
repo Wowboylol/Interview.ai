@@ -66,3 +66,7 @@ var addUser = async(email, password) => {
         return false;
     }
 };
+
+module.exports = {
+    login
+};
