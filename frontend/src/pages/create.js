@@ -1,5 +1,5 @@
 import { useState, useRef } from "react";
-import { useNavigate} from "react-router-dom"
+import { useNavigate } from "react-router-dom";
 import { startInterview } from "../services/userService";
 import Snackbar from "../components/snackbar";
 
@@ -32,7 +32,9 @@ function Create() {
 
   return (
     <div className="flex min-h-screen flex-col items-center justify-center font-serif gap-8">
-      <h1 className="text-3xl">Fill in the boxes to create a prompt for the interview</h1>
+      <h1 className="text-3xl">
+        Fill in the boxes to create a prompt for the interview
+      </h1>
       <div>
         <div className="flex items-center pb-3">
           <label className="pr-4">Name:</label>
@@ -124,6 +126,9 @@ function Create() {
             placeholder="Job requirements"
           />
         </div>
+          <p className="text-sm">
+            * The technologies required for the job
+          </p>
       </div>
       <button
         className="border-2 border-black rounded-full shadow hover:shadow-md hover:opacity-50 p-4 transition duration-500"
