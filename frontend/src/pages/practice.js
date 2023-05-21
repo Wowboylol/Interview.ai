@@ -9,8 +9,9 @@ import { useLocation, useNavigate } from "react-router-dom";
 const appId = "7fd27f79-99ff-4484-879a-5b776ba182d1";
 const SpeechlySpeechRecognition = createSpeechlySpeechRecognition(appId);
 SpeechRecognition.applyPolyfill(SpeechlySpeechRecognition);
+const results = "/results";
+const responses = [];
 let waiting = true;
-const results = "/results"
 
 function Practice() {
   const location = useLocation();
@@ -35,19 +36,22 @@ function Practice() {
   }
 
   function startInterview() {
-    SpeechRecognition.startListening({ continuous: true });
     waiting = false;
+    SpeechRecognition.startListening({ continuous: true });
   }
 
   function nextQuestion() {
     setIndex(index + 1);
+    responses.push(transcript);
+    console.log(responses);
     if (index === data.length - 1) {
       finished = true;
     }
     if (finished) {
-      navigate(results);
+      SpeechRecognition.stopListening();
+      waiting = true;
+      navigate(results, {state: {data, responses}});
     }
-    console.log(finished);
     resetTranscript();
   }
 

@@ -26,7 +26,6 @@ function Create() {
       snackbarRef.current.show();
     } else {
       const data = await startInterview(prompt);
-      console.log(data);
       navigate(practice, {state: {data}});
     }
   }
