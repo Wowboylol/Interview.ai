@@ -7,8 +7,6 @@ const db = require('./database');
 const app = express();
 const port = 4200;
 
-app.use(cors());
-app.use(express.json());
 app.use(session({
     secret: 'test',
     resave: false,
@@ -17,16 +15,20 @@ app.use(session({
         maxAge: 1000 * 60 * 60 * 24
     }
 }));
+app.use(cors());
+app.use(express.json());
 
 function isLoggedIn(req,res,next){
-    if (req.session.user){
+    if(req.session.user){
         return next()
     }
-    res.redirect('/auth');
+    else {
+        res.status(401).json({session: false});
+    }
 }
 
-app.get('/auth', isLoggedIn, (req,res) => {
-    res.redirect('/view-prompts');
+app.get('/api/relogin', isLoggedIn, (req,res) => {
+    res.status(200).json({session: true});
 })
 
 app.post('/api/login', async (req,res) => {
@@ -35,12 +37,12 @@ app.post('/api/login', async (req,res) => {
     
     var user = await db.login(email, password);
     if(!user) {
-        console.log("INVALID LOGIN");
-        res.status(401).send("Invalid login");
+        res.status(400).json({
+            message: "Invalid login"
+        })
     }
     else if(user) {
-        console.log("SUCCESSFUL LOGIN", user);
-        req.session.user = {id: user._id, email: email };
+        req.session.user = user;
         req.session.regenerate(function (err) {
             if (err) next(err)
             
@@ -48,7 +50,9 @@ app.post('/api/login', async (req,res) => {
               if (err) return next(err)
             });
         });
-        res.status(200).send("Successful login");
+        res.status(200).json({
+            message: "Login successful"
+        })
     }
 });
 

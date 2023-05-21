@@ -4,6 +4,7 @@ import Create from "./pages/create";
 import View from "./pages/view";
 import Practice from "./pages/practice";
 import Results from "./pages/results";
+import Login from "./pages/login";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
           <Route path="/view" element={<View />} />
           <Route path="/practice" element={<Practice />} />
           <Route path="/results" element={<Results />} />
+          <Route path="/login" element={<Login />} />
         </Routes>
       </div>
     </div>
