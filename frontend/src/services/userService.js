@@ -68,7 +68,7 @@ export async function loginAPI(data)
 export async function checkSession()
 {
     try {
-        const response = await fetch('http://localhost:4200/auth', {
+        const response = await fetch('http://localhost:4200/api/relogin', {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'

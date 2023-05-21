@@ -7,8 +7,6 @@ const db = require('./database');
 const app = express();
 const port = 4200;
 
-app.use(cors());
-app.use(express.json());
 app.use(session({
     secret: 'test',
     resave: false,
@@ -17,15 +15,19 @@ app.use(session({
         maxAge: 1000 * 60 * 60 * 24
     }
 }));
+app.use(cors());
+app.use(express.json());
 
 function isLoggedIn(req,res,next){
     if(req.session.user){
         return next()
     }
-    res.status(401).json({session: false});
+    else {
+        res.status(401).json({session: false});
+    }
 }
 
-app.get('/auth', isLoggedIn, (req,res) => {
+app.get('/api/relogin', isLoggedIn, (req,res) => {
     res.status(200).json({session: true});
 })
 
@@ -40,7 +42,7 @@ app.post('/api/login', async (req,res) => {
         })
     }
     else if(user) {
-        req.session.user = {id: user._id, email: email };
+        req.session.user = user;
         req.session.regenerate(function (err) {
             if (err) next(err)
             
