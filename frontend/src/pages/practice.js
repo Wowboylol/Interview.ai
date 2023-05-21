@@ -69,7 +69,7 @@ function Practice() {
     // </div>
     <div>
       {waiting ? 
-        <div className="flex min-h-screen flex-col items-center justify-center font-serif gap-4">
+        <div className="flex min-h-screen flex-col items-center justify-center font-serif gap-4 font-semibold">
           <button
             className="border-2 border-black rounded-full shadow hover:shadow-md hover:opacity-50 p-4 transition duration-500"
             onClick={startInterview}
@@ -78,7 +78,7 @@ function Practice() {
           </button>
           <p>Good luck!</p>
         </div> : 
-        <div className="text-center flex flex-col items-center gap-10 font-serif text-bold">
+        <div className="text-center flex flex-col items-center gap-10 font-serif text-bold font-semibold">
           <h1 className="pt-10 text-3xl">{data[index]}</h1>
           <p className="text-x w-2/3">{transcript}</p>
           <button
