@@ -44,6 +44,26 @@ const login = async(email, password) => {
         });
 }
 
+// Add a prompt to the database
+// Returns true if successful, false otherwise
+var addPrompt = async (user_id, name, position, job_reqs) => {
+    var newPrompt = new Prompt({
+        user_id: user_id,
+        name: name,
+        position: position,
+        job_reqs: job_reqs
+    });
+
+    try {
+        await newPrompt.save();
+        return true;
+    }
+    catch(error) {
+        console.log(error);
+        return false;
+    }
+};
+
 // Returns true if user exists already
 var userExists = async (email) => {
     return await User.findOne({email: email});
@@ -67,6 +87,9 @@ var addUser = async(email, password) => {
     }
 };
 
+// addPrompt("5f9e9b1b1c9d440000d1e0b0", "Test Prompt", "Test Position", "Test Job Reqs")
+
 module.exports = {
-    login
+    login,
+    addPrompt
 };

@@ -57,6 +57,20 @@ app.get('/api/profile', (req,res) => {
     res.json(req.session.user);
 });
 
+app.post('/api/create-prompt', async (req,res) => {
+    var user_id = req.session.user.id;
+    var name = req.body.name;
+    var position = req.body.position;
+    var job_reqs = req.body.job_reqs;
+    
+    try {
+        db.addPrompt(user_id, name, position, job_reqs);
+        res.status(200).send("Prompt created successfully");
+    }
+    catch(error) {
+        res.status(500).send("Error creating prompt");
+    }
+});
 
 app.post('/api/start', async (req, res) => {
     console.log(req.body);
