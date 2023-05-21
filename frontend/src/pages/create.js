@@ -7,7 +7,7 @@ function Create() {
   const [prompt, setPrompt] = useState({
     name: "",
     position: "",
-    technologies: "",
+    job_requirements: "",
   });
   const SnackbarType = {
     success: "success",
@@ -21,7 +21,7 @@ function Create() {
     if (
       prompt.name === "" ||
       prompt.position === "" ||
-      prompt.technologies === ""
+      prompt.job_requirements === ""
     ) {
       snackbarRef.current.show();
     } else {
@@ -95,7 +95,7 @@ function Create() {
           />
         </div>
         <div className="flex items-center">
-          <label className="pr-4">Technologies:</label>
+          <label className="pr-4">Job Requirements:</label>
           <textarea
             className="
         form-control
@@ -114,14 +114,14 @@ function Create() {
         ease-in-out
         focus:border-accent focus:bg-white focus:text-gray-700 focus:outline-none
       "
-            value={prompt.technologies}
+            value={prompt.job_requirements}
             onChange={(e) =>
               setPrompt({
                 ...prompt,
-                technologies: e.target.value,
+                job_requirements: e.target.value,
               })
             }
-            placeholder="Required technologies"
+            placeholder="Job requirements"
           />
         </div>
       </div>
