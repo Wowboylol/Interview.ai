@@ -25,11 +25,24 @@ const initialize = async(position, name, job_reqs) =>
             max_tokens: 500
         });
         console.log(completion.data.choices[0].text);
-        return completion.data.choices[0].text;
+        return parseResponse(completion.data.choices[0].text);
     }
     catch(err) {
         console.log(err);
     }
+}
+
+// Parse response into an array of questions
+const parseResponse = (response) => {
+    var questions = response.split(/\r?\n/); 
+
+    for(var i = 0; i < questions.length; i++) {
+        if(questions[i] == "") {
+            questions.splice(i, 1);
+            i--;
+        }
+    }
+    return questions;
 }
 
 // Continue generating interview questions based on setup prompt
@@ -55,13 +68,20 @@ const appendToMemory = (str) => {
     memory += str;
 }
 
+// Get memory
 const getMemory = () => {
     return memory;
+}
+
+// Clear memory
+const clearMemory = () => {
+    memory = "";
 }
 
 module.exports = {
     initialize,
     getNextResponse,
     appendToMemory,
-    getMemory
+    getMemory,
+    clearMemory
 };
