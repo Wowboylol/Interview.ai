@@ -6,10 +6,17 @@ const configuration = new Configuration({
 
 const openai = new OpenAIApi(configuration);
 
+var memory = "";
+
 // Initialize chatGPT with setup prompt
-const initialize = async(input_prompt) => 
+const initialize = async(position, name, job_reqs) => 
 {
-    const setup_prompt = input_prompt;
+    const setup_prompt = `This is an interview. You are to interview me for a ${position} that 
+        requires ${job_reqs}. My name is ${name}. Act like this is a real interview, and you 
+        are the interviewer and I'm the interviewee. Your only task is to generate 5 questions 
+        MAX that you would ask an interviewee to ensure they are a good fit based on the 
+        previous information. Do not respond to the questions you generated.`;
+    memory += setup_prompt;
 
     try {
         const completion = await openai.createCompletion({
@@ -43,7 +50,13 @@ const getNextResponse = async(input_prompt) => {
     }
 }
 
+// Append given string to memory
+const appendToMemory = (str) => {
+    memory += str;
+}
+
 module.exports = {
     initialize,
-    getNextResponse
+    getNextResponse,
+    appendToMemory
 };
