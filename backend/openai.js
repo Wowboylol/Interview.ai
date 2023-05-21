@@ -37,7 +37,7 @@ const parseResponse = (response) => {
     var questions = response.split(/\r?\n/); 
 
     for(var i = 0; i < questions.length; i++) {
-        if(questions[i] == "") {
+        if(questions[i] == " ") {
             questions.splice(i, 1);
             i--;
         }
