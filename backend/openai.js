@@ -55,8 +55,13 @@ const appendToMemory = (str) => {
     memory += str;
 }
 
+const getMemory = () => {
+    return memory;
+}
+
 module.exports = {
     initialize,
     getNextResponse,
-    appendToMemory
+    appendToMemory,
+    getMemory
 };

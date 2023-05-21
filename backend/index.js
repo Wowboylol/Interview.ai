@@ -18,7 +18,7 @@ app.post('/api/start', async (req, res) => {
 });
 
 app.get('/api/prompt', async (req, res) => {
-    var user_input = " What is a data science?"; //temporary variable for testing
+    var user_input = ai.getMemory() + " What is a data science?"; //temporary variable for testing
     ai.appendToMemory("Me: " + user_input + " ");
     const response = await ai.getNextResponse(user_input);
     ai.appendToMemory("You: " + response + " ");
