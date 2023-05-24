@@ -93,8 +93,8 @@ var addUser = async(email, password) => {
     }
 };
 
-addPrompt("5f9e9b1b1c9d440000d1e0b0", "Test Prompt", "Test Position", "Test Job Reqs")
-addUser("test@test.com", "test123");
+// addPrompt("5f9e9b1b1c9d440000d1e0b0", "Test Prompt", "Test Position", "Test Job Reqs")
+// addUser("test@test.com", "test123");
 
 // (async () => {
 //     var prompts = await getPrompts("5f9e9b1b1c9d440000d1e0b0");
