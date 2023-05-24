@@ -1,6 +1,6 @@
 var md5 = require('md5');
 var mongoose = require('mongoose');
-mongoose.connect("mongodb+srv://lsa105:gXOiiWxouLYFvgAy@notes.xobu7vs.mongodb.net/interview?retryWrites=true&w=majority");
+mongoose.connect("mongodb+srv://CMPT354:DTCyXnms4EJ2QTm4@sfx-database.uug5hfr.mongodb.net/interview?retryWrites=true&w=majority");
 
 var db = mongoose.connection;
 db.on("error", console.error.bind(console,"connection error"));
@@ -93,7 +93,9 @@ var addUser = async(email, password) => {
     }
 };
 
-// addPrompt("5f9e9b1b1c9d440000d1e0b0", "Test Prompt", "Test Position", "Test Job Reqs")
+addPrompt("5f9e9b1b1c9d440000d1e0b0", "Test Prompt", "Test Position", "Test Job Reqs")
+addUser("test@test.com", "test123");
+
 // (async () => {
 //     var prompts = await getPrompts("5f9e9b1b1c9d440000d1e0b0");
 //     console.log(prompts);
