@@ -81,6 +81,7 @@ app.get('/api/view-prompts', async (req,res) => {
     {
         var user_id = saved_session.id;
         var prompts = await db.getPrompts(user_id);
+        console.log(prompts);
         res.json(prompts);
     }
 });
