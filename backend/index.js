@@ -1,25 +1,27 @@
 const express = require('express');
 const cors = require('cors');
 const session = require('express-session');
+const cookieParser = require("cookie-parser");
 const ai = require('./openai');
 const db = require('./database');
 
 const app = express();
 const port = 4200;
+var saved_session;
 
 app.use(session({
-    secret: 'test',
-    resave: false,
-    saveUninitialized: true,
-    cookie: {
-        maxAge: 1000 * 60 * 60 * 24
-    }
+    name: 'session',
+    secret : 'yourSecret',
+    resave : false,
+    maxAge: 30*60*1000,
+    saveUninitialized : false,
 }));
 app.use(cors());
 app.use(express.json());
+app.use(cookieParser());
 
 function isLoggedIn(req,res,next){
-    if(req.session.user){
+    if(saved_session){
         return next()
     }
     else {
@@ -42,14 +44,8 @@ app.post('/api/login', async (req,res) => {
         })
     }
     else if(user) {
-        req.session.user = user;
-        req.session.regenerate(function (err) {
-            if (err) next(err)
-            
-            req.session.save(function (err) {
-              if (err) return next(err)
-            });
-        });
+        req.session.user = {id: (user._id).toString(), email: user.email};
+        saved_session = req.session.user;
         res.status(200).json({
             message: "Login successful"
         })
@@ -57,12 +53,12 @@ app.post('/api/login', async (req,res) => {
 });
 
 app.get('/api/profile', (req,res) => {
-    console.log("Session user:" + JSON.stringify(req.session.user));
-    res.json(req.session.user);
+    console.log("Session user:" + JSON.stringify(saved_session));
+    res.json(saved_session);
 });
 
 app.post('/api/create-prompt', async (req,res) => {
-    var user_id = req.session.user.id;
+    var user_id = saved_session.id;
     var name = req.body.name;
     var position = req.body.position;
     var job_reqs = req.body.job_reqs;
@@ -77,9 +73,16 @@ app.post('/api/create-prompt', async (req,res) => {
 });
 
 app.get('/api/view-prompts', async (req,res) => {
-    var user_id = req.session.user.id;
-    var prompts = await db.getPrompts(user_id);
-    res.json(prompts);
+    if(!saved_session) 
+    {
+        res.status(401).json({session: false});
+    }
+    else
+    {
+        var user_id = saved_session.id;
+        var prompts = await db.getPrompts(user_id);
+        res.json(prompts);
+    }
 });
 
 app.post('/api/start', async (req, res) => {
