@@ -1,10 +1,17 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { loadPrompt } from "../services/userService";
 
 function View() {
   const navigate = useNavigate();
   const home = "/";
   const practice = "/practice";
+
+  async function getData()
+  {
+    const data = await loadPrompt();
+    console.log(data);
+  }
 
   return (
     <div>
@@ -14,7 +21,7 @@ function View() {
             Previous interview prompts
           </h1>
           <button
-            onClick={() => navigate(home)}
+            onClick={() => getData()}
             className="border-2 border-black rounded-full shadow hover:shadow-md hover:opacity-50 p-4 transition duration-500"
           >
             Home Page

@@ -93,11 +93,11 @@ var addUser = async(email, password) => {
     }
 };
 
-// addPrompt("5f9e9b1b1c9d440000d1e0b0", "Test Prompt", "Test Position", "Test Job Reqs")
+// addPrompt("646d66bd039d408348f0d1a8", "Test Prompt", "Test Position", "Test Job Reqs")
 // addUser("test@test.com", "test123");
 
 // (async () => {
-//     var prompts = await getPrompts("5f9e9b1b1c9d440000d1e0b0");
+//     var prompts = await getPrompts("646d66bd039d408348f0d1a8");
 //     console.log(prompts);
 // })();
 

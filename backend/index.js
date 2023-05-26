@@ -44,8 +44,9 @@ app.post('/api/login', async (req,res) => {
         })
     }
     else if(user) {
-        req.session.user = {id: (user._id).toString(), email: user.email};
+        req.session.user = {id: user._id, email: user.email};
         saved_session = req.session.user;
+        console.log(saved_session);
         res.status(200).json({
             message: "Login successful"
         })
