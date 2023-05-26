@@ -14,6 +14,7 @@ function Login() {
 
     return (
         <div className="flex min-h-screen flex-col items-center justify-center font-serif font-semibold gap-8"> 
+        <h1 className="text-3xl"> Enter your email and password to continue</h1>
             <div>
                 <input
                 className="

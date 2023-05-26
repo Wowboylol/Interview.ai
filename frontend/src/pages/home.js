@@ -31,7 +31,7 @@ function Home() {
         </button>
         <button
           className="border-2 border-black rounded-full shadow hover:shadow-md hover:opacity-50 p-4 transition duration-500"
-          onClick={() => session()}
+          onClick={() => navigate(view)}
         >
           View existing prompts
         </button>
