@@ -7,11 +7,16 @@ function View() {
   const home = "/";
   const practice = "/practice";
   const navigate = useNavigate();
-  const [data, setData] = useState(null);
+  const [data, setData] = useState({name: "", position: "", job_reqs: ""});
   useEffect(() => {
-    loadPrompt().then((value) => setData(value));
+    loadPrompt().then((value) => setData(...value,));
   });
-  console.log(data);
+
+  if (!data) {
+    return (
+      <Loader/>
+    );
+  }
 
   return (
     <div>
@@ -36,6 +41,9 @@ function View() {
               key={i}
             ></PresentationCard>
           ))} */}
+          {data.name}
+          {data.position}
+          {data.job_reqs}
         </section>
       </div>
     </div>
