@@ -1,18 +1,17 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { loadPrompt } from "../services/userService";
+import Loader from "../components/loader";
 
 function View() {
-  const navigate = useNavigate();
   const home = "/";
   const practice = "/practice";
-
-  async function getPrompt() {
-    const data = await loadPrompt();
-    console.log(data);
-    return data;
-  }
-
+  const navigate = useNavigate();
+  const [data, setData] = useState(null);
+  useEffect(() => {
+    loadPrompt().then((value) => setData(value));
+  });
+  console.log(data);
 
   return (
     <div>
@@ -22,7 +21,7 @@ function View() {
             Previous interview prompts
           </h1>
           <button
-            onClick={() => getPrompt()}
+            onClick={() => navigate(home)}
             className="border-2 border-black rounded-full shadow hover:shadow-md hover:opacity-50 p-4 transition duration-500"
           >
             Home Page
