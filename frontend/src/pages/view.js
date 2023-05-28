@@ -5,12 +5,12 @@ import Loader from "../components/loader";
 
 function View() {
   const home = "/";
-  const practice = "/practice";
   const navigate = useNavigate();
-  const [data, setData] = useState({name: "", position: "", job_reqs: ""});
+  const [data, setData] = useState([]);
   useEffect(() => {
-    loadPrompt().then((value) => setData(...value,));
-  });
+    loadPrompt().then((value) => setData(data => [...data, value]));
+    console.log("idk")
+  }, []);
 
   if (!data) {
     return (
@@ -35,39 +35,36 @@ function View() {
         <section
           className="grid auto-rows-fr grid-cols-4"
         >
-          {/* {data.map((presentation, i) => (
+          {/* {data.products.map((presentation, i) => (
             <PresentationCard
               presentation={presentation}
               key={i}
             ></PresentationCard>
           ))} */}
-          {data.name}
-          {data.position}
-          {data.job_reqs}
         </section>
+        {
+  console.log(data)}
       </div>
     </div>
   );
 }
 
-// const PresentationCard = ({
-//   presentation,
-// }) => {
+// function PresentationCard(data) {
+//   const navigate = useNavigate();
 //   return (
 //     <button
+//     onClick={() => navigate("/practice", {state: {data}})}
 //       className="m-4 flex flex-col rounded-xl border-2 p-4 text-left"
-//       onClick={() => navigate(practice, {state: {data}})}
 //     >
 //       <div className="h-4 w-full"></div>
-//       <i>{presentation.createdAt.toDateString()}</i>
-//       <h1 className="text-2xl font-extrabold">{presentation.title}</h1>
+//       <i>{data.name}</i>
+//       <h1 className="text-2xl font-extrabold">{data.position}</h1>
 //       <div className="text-accent">
-//         Goal time: {Math.round((presentation.idealTime / 60) * 100) / 100}{" "}
-//         minutes
+//         Job requirements: {data.job_reqs}
 //       </div>
 //     </button>
 //   );
-// };
+// }
 
 export default View;
   
