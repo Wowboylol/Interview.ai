@@ -8,14 +8,11 @@ function View() {
   const navigate = useNavigate();
   const [data, setData] = useState([]);
   useEffect(() => {
-    loadPrompt().then((value) => setData(data => [...data, value]));
-    console.log("idk")
+    loadPrompt().then((value) => setData((data) => [...data, value]));
   }, []);
 
   if (!data) {
-    return (
-      <Loader/>
-    );
+    return <Loader />;
   }
 
   return (
@@ -32,39 +29,36 @@ function View() {
             Home Page
           </button>
         </div>
-        <section
-          className="grid auto-rows-fr grid-cols-4"
-        >
-          {/* {data.products.map((presentation, i) => (
-            <PresentationCard
-              presentation={presentation}
-              key={i}
-            ></PresentationCard>
-          ))} */}
+        <section className="grid auto-rows-fr grid-cols-4">
+          {console.log(data)}
+          {data.map((element, index) => (
+            <Prompt name={element[index].name} position={element[index].position} job_reqs={element[index].job_reqs}/>
+          ))}
         </section>
-        {
-  console.log(data)}
       </div>
     </div>
   );
 }
 
-// function PresentationCard(data) {
-//   const navigate = useNavigate();
-//   return (
-//     <button
-//     onClick={() => navigate("/practice", {state: {data}})}
-//       className="m-4 flex flex-col rounded-xl border-2 p-4 text-left"
-//     >
-//       <div className="h-4 w-full"></div>
-//       <i>{data.name}</i>
-//       <h1 className="text-2xl font-extrabold">{data.position}</h1>
-//       <div className="text-accent">
-//         Job requirements: {data.job_reqs}
-//       </div>
-//     </button>
-//   );
-// }
+function Prompt(props) {
+  const navigate = useNavigate();
+  const name = props.name;
+  const position = props.position;
+  const job_reqs = props.job_reqs
+  console.log(name);
+  return (
+    <button
+    onClick={() => navigate("/practice", {state: {name, position, job_reqs}})}
+      className="m-4 flex flex-col rounded-xl border-2 p-4 text-left"
+    >
+      <div className="h-4 w-full"></div>
+      <i>{name}</i>
+      <h1 className="text-2xl font-extrabold">{position}</h1>
+      <div className="text-accent">
+        Job requirements: {job_reqs}
+      </div>
+    </button>
+  );
+}
 
 export default View;
-  
