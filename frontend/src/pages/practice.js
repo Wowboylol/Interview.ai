@@ -62,17 +62,6 @@ function Practice() {
   }
 
   return (
-    // <div>
-    //   <p>Microphone: {listening ? "on" : "off"}</p>
-    //   <button
-    //     onClick={() => SpeechRecognition.startListening({ continuous: true })}
-    //   >
-    //     Start
-    //   </button>
-    //   <button onClick={SpeechRecognition.stopListening}>Stop</button>
-    //   <button onClick={resetTranscript}>Reset</button>
-    //   <p>{transcript}</p>
-    // </div>
     <div>
       {waiting ? (
         <div className="flex min-h-screen flex-col items-center justify-center font-serif gap-4 font-semibold">
