@@ -26,7 +26,7 @@ function Create() {
       snackbarRef.current.show();
     } else {
       const data = await startInterview(prompt);
-      navigate(practice, {state: {data}});
+      navigate(practice, { state: { data } });
     }
   }
 
@@ -126,9 +126,7 @@ function Create() {
             placeholder="Job requirements"
           />
         </div>
-          <p className="text-sm">
-            * The technologies required for the job
-          </p>
+        <p className="text-sm">* The technologies required for the job</p>
       </div>
       <button
         className="border-2 border-black rounded-full shadow hover:shadow-md hover:opacity-50 p-4 transition duration-500"

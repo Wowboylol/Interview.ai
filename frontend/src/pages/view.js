@@ -32,7 +32,12 @@ function View() {
         </div>
         <section className="grid auto-rows-fr grid-cols-4">
           {data.map((element, index) => (
-            <Prompt key={index} name={element[index].name} position={element[index].position} job_reqs={element[index].job_reqs}/>
+            <Prompt
+              key={index}
+              name={element[index].name}
+              position={element[index].position}
+              job_reqs={element[index].job_reqs}
+            />
           ))}
         </section>
       </div>
@@ -42,29 +47,25 @@ function View() {
 
 function Prompt(props) {
   const navigate = useNavigate();
-  const practice = "/practice"
+  const practice = "/practice";
   const name = props.name;
   const position = props.position;
-  const job_reqs = props.job_reqs
-  
+  const job_reqs = props.job_reqs;
+
   async function goPractice(name, position, job_reqs) {
-    const data = await startInterview({name, position, job_reqs})
-    navigate(practice, {state: {data}});
+    const data = await startInterview({ name, position, job_reqs });
+    navigate(practice, { state: { data } });
   }
 
   return (
     <button
-    // onClick={() => navigate("/practice", {state: {name, position, job_reqs}})}
-
-    onClick={() => goPractice(name, position, job_reqs)}
+      onClick={() => goPractice(name, position, job_reqs)}
       className="m-4 flex flex-col rounded-xl border-2 p-4 text-left"
     >
       <div className="h-4 w-full"></div>
       <i>{name}</i>
       <h1 className="text-2xl font-extrabold">{position}</h1>
-      <div className="text-accent">
-        Job requirements: {job_reqs}
-      </div>
+      <div className="text-accent">Job requirements: {job_reqs}</div>
     </button>
   );
 }

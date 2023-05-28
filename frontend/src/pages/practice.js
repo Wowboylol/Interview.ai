@@ -87,12 +87,7 @@ function Practice() {
       ) : (
         <div className="text-center flex flex-col items-center gap-10 font-serif text-bold font-semibold">
           <h1 className="pt-10 text-3xl">{data[index]}</h1>
-          {loader ? (
-            <Loader/>
-          ) : (
-            <div>
-            </div>
-          )}
+          {loader ? <Loader /> : <div></div>}
           <Webcam height="200" width="400" onUserMedia={handleLoader} />
           <p className="text-x w-2/3">{transcript}</p>
           <button
