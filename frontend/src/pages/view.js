@@ -9,7 +9,7 @@ function View() {
   const navigate = useNavigate();
   const [data, setData] = useState([]);
   useEffect(() => {
-    loadPrompt().then((value) => setData((data) => [...data, value]));
+    loadPrompt().then(value => setData(value));
   }, []);
 
   if (!data) {
@@ -34,9 +34,9 @@ function View() {
           {data.map((element, index) => (
             <Prompt
               key={index}
-              name={element[index].name}
-              position={element[index].position}
-              job_reqs={element[index].job_reqs}
+              name={element.name}
+              position={element.position}
+              job_reqs={element.job_reqs}
             />
           ))}
         </section>
