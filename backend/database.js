@@ -70,30 +70,49 @@ var getPrompts = async (user_id) => {
     return await Prompt.find({user_id: user_id});
 }
 
-// Returns true if user exists already
+// Updates a prompt based on prompt_id
+// Returns true if successful, false otherwise
+var updatePrompt = async(prompt_id, name, position, job_reqs) => {
+    return await Prompt.updateOne({ _id: prompt_id }, { name: name }, { position: position }, { job_reqs: job_reqs }, { updatedAt: Date.now })
+        .then((result) => {
+            if (result.modifiedCount > 0) {
+                console.log("Prompt updated!");
+                return true;
+            }
+            else {
+                console.log("prompt not updated!");
+                return false;
+            }
+        });
+}
+
+// Helper function: returns true if user exists already
 var userExists = async (email) => {
     return await User.findOne({email: email});
 }
 
 // This function is for testing purposes only
-var addUser = async(email, password) => {
-    var newUser = new User({
-        email: email,
-        password: md5(password)
-    });
+// var addUser = async(email, password) => {
+//     var newUser = new User({
+//         email: email,
+//         password: md5(password)
+//     });
     
-    try {
-        if(await userExists(email)) throw new Error("User already exists!");
-        await newUser.save();
-        return true;
-    }
-    catch(error) {
-        console.log(error);
-        return false;
-    }
-};
+//     try {
+//         if(await userExists(email)) throw new Error("User already exists!");
+//         await newUser.save();
+//         return true;
+//     }
+//     catch(error) {
+//         console.log(error);
+//         return false;
+//     }
+// };
 
-// addPrompt("646d66bd039d408348f0d1a8", "Test Prompt", "Test Position", "Test Job Reqs")
+// addPrompt("646d66bd039d408348f0d1a8", "John", "Software Developer", "C++, Java, Python");
+// addPrompt("646d66bd039d408348f0d1a8", "Celene", "Full-stack Web Developer", "React, Node.js, MongoDB, Express.js");
+// addPrompt("646d66bd039d408348f0d1a8", "Steve", "Software Quality Assurance", "JUnit, Selenium, Postman, Jira");
+// addPrompt("646d66bd039d408348f0d1a8", "Angela", "Front-end Web Developer", "HTML, CSS, Angular, Bootstrap");
 // addUser("test@test.com", "test123");
 
 // (async () => {
@@ -105,4 +124,5 @@ module.exports = {
     login,
     addPrompt,
     getPrompts,
+    updatePrompt
 };

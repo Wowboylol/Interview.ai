@@ -87,6 +87,21 @@ app.get('/api/view-prompts', async (req,res) => {
     }
 });
 
+app.put('/api/update-prompt', async (req,res) => {
+    var prompt_id = req.body.prompt_id;
+    var name = req.body.name;
+    var position = req.body.position;
+    var job_reqs = req.body.job_reqs;
+    
+    try {
+        db.updatePrompt(prompt_id, name, position, job_reqs);
+        res.status(200).send("Prompt updated successfully");
+    }
+    catch(error) {
+        res.status(500).send("Error updating prompt");
+    }
+});
+
 app.post('/api/start', async (req, res) => {
     console.log(req.body);
     ai.clearMemory();

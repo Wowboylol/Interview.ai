@@ -48,6 +48,30 @@ export async function loadPrompt(data)
     }
 }
 
+export async function updatePrompt(prompt_id, name, position, job_reqs)
+{
+    const data = {
+        prompt_id: prompt_id,
+        name: name,
+        position: position,
+        job_reqs: job_reqs
+    }
+
+    try {
+        const response = await fetch('http://localhost:4200/api/update-prompt', {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+        return await response.json();
+    }
+    catch(err) {
+        console.log(err);
+    }
+}
+
 export async function loginAPI(data)
 {
     try {
