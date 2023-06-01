@@ -12,7 +12,7 @@ const appId = "7fd27f79-99ff-4484-879a-5b776ba182d1";
 const SpeechlySpeechRecognition = createSpeechlySpeechRecognition(appId);
 SpeechRecognition.applyPolyfill(SpeechlySpeechRecognition);
 const results = "/results";
-const responses = [];
+let responses = [];
 let waiting = true;
 
 function Practice() {
@@ -53,6 +53,8 @@ function Practice() {
       SpeechRecognition.stopListening();
       waiting = true;
       navigate(results, { state: { data, responses } });
+      responses = [];
+
     }
     resetTranscript();
   }
