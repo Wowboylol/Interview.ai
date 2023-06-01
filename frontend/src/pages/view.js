@@ -3,13 +3,14 @@ import { useNavigate } from "react-router-dom";
 import { loadPrompt } from "../services/userService";
 import Loader from "../components/loader";
 import { startInterview } from "../services/userService";
+import { BiEdit } from "react-icons/bi";
 
 function View() {
   const home = "/";
   const navigate = useNavigate();
   const [data, setData] = useState([]);
   useEffect(() => {
-    loadPrompt().then(value => setData(value));
+    loadPrompt().then((value) => setData(value));
   }, []);
 
   if (!data) {
@@ -48,6 +49,7 @@ function View() {
 function Prompt(props) {
   const navigate = useNavigate();
   const practice = "/practice";
+  const edit = "/edit";
   const name = props.name;
   const position = props.position;
   const job_reqs = props.job_reqs;
@@ -63,9 +65,23 @@ function Prompt(props) {
       className="m-4 flex flex-col rounded-xl border-2 p-4 text-left"
     >
       <div className="h-4 w-full"></div>
-      <i>{name}</i>
-      <h1 className="text-2xl font-extrabold">{position}</h1>
-      <div className="text-accent">Job requirements: {job_reqs}</div>
+      <div className="flex">
+        <div>
+          <i>{name}</i>
+          <h1 className="text-2xl font-extrabold">{position}</h1>
+          <div className="text-accent">Job requirements: {job_reqs}</div>
+        </div>
+        <div>
+          <button
+            onClick={(e) => {
+              navigate(edit);
+              e.stopPropagation();
+            }}
+          >
+            <BiEdit />
+          </button>
+        </div>
+      </div>
     </button>
   );
 }
