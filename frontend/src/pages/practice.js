@@ -40,6 +40,7 @@ function Practice() {
   function startInterview() {
     waiting = false;
     SpeechRecognition.startListening({ continuous: true });
+    resetTranscript();
   }
 
   function nextQuestion() {
@@ -50,11 +51,10 @@ function Practice() {
       finished = true;
     }
     if (finished) {
-      SpeechRecognition.stopListening();
+      SpeechRecognition.abortListening();
       waiting = true;
       navigate(results, { state: { data, responses } });
       responses = [];
-
     }
     resetTranscript();
   }
