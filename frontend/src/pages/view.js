@@ -74,7 +74,7 @@ function Prompt(props) {
         <div>
           <button
             onClick={(e) => {
-              navigate(edit);
+              navigate(edit, { state: {name, position, job_reqs}});
               e.stopPropagation();
             }}
           >
