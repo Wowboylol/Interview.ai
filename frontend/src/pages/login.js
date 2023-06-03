@@ -8,7 +8,7 @@ function Login() {
     console.log(data["message"]);
 
     if (data["message"] === "Login successful") {
-      window.location.href = "/view-prompts";
+      window.location.href = "/";
     }
   }
 
