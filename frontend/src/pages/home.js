@@ -7,15 +7,15 @@ function Home() {
   const view = "/view";
   const login = "/login";
 
-  async function session() {
+  async function session(props) {
     var valid = await checkSession();
     if (valid["session"] === true) {
-      navigate(view);
+      navigate(props);
     } else {
       navigate(login);
     }
   }
-
+  
   return (
     <div className="flex min-h-screen flex-col items-center justify-center gap-8 font-serif font-semibold">
       <h1 className="text-4xl text-center justify-center">Interview.ai</h1>
@@ -25,13 +25,13 @@ function Home() {
       <div className="pt-4 space-x-12">
         <button
           className="border-2 border-black rounded-full shadow hover:shadow-md hover:opacity-50 p-4 transition duration-500"
-          onClick={() => navigate(create)}
+          onClick={() => session(create)}
         >
           Create a new prompt
         </button>
         <button
           className="border-2 border-black rounded-full shadow hover:shadow-md hover:opacity-50 p-4 transition duration-500"
-          onClick={() => navigate(view)}
+          onClick={() => session(view)}
         >
           View existing prompts
         </button>
