@@ -1,28 +1,25 @@
 import { useState, useRef } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import { startInterview } from "../services/userService";
+import { updatePrompt } from "../services/userService";
 import Snackbar from "../components/snackbar";
 
 function Edit() {
   const location = useLocation();
-  const [prompt, setPrompt] = useState({
-    name: "",
-    position: "",
-    job_requirements: "",
-  });
-
   const SnackbarType = {
     success: "success",
     fail: "fail",
   };
   const snackbarRef = useRef(null);
   const navigate = useNavigate();
-  const home = "/";
-  const practice = "/practice";
+  const view = "/view";
   const name = location.state.name;
   const position = location.state.position;
   const job_reqs = location.state.job_reqs;
-
+  const [prompt, setPrompt] = useState({
+    name: name,
+    position: position,
+    job_requirements: job_reqs,
+  });
 
   async function displaySnackbar() {
     if (
@@ -31,9 +28,10 @@ function Edit() {
       prompt.job_requirements === ""
     ) {
       snackbarRef.current.show();
+      console.log(snackbarRef.current);
     } else {
-      const data = await startInterview(prompt);
-      navigate(practice, { state: { data } });
+      // updatePrompt(prompt.name, prompt.position, prompt.job_reqs);
+      navigate(view);
     }
   }
 
@@ -141,7 +139,7 @@ function Edit() {
           displaySnackbar();
         }}
       >
-        Create your prompt for your interview
+        Click to edit your prompt
       </button>
       <Snackbar
         ref={snackbarRef}
@@ -151,10 +149,10 @@ function Edit() {
       <button
         className="border-2 border-black rounded-full shadow hover:shadow-md hover:opacity-50 p-4 transition duration-500"
         onClick={() => {
-          navigate(home);
+          navigate(view);
         }}
       >
-        Go back to the home page
+        Go back to view your existing prompts
       </button>
     </div>
   );
