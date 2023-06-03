@@ -35,6 +35,7 @@ function View() {
           {data.map((element, index) => (
             <Prompt
               key={index}
+              id={element._id}
               name={element.name}
               position={element.position}
               job_reqs={element.job_reqs}
@@ -50,6 +51,7 @@ function Prompt(props) {
   const navigate = useNavigate();
   const practice = "/practice";
   const edit = "/edit";
+  const id = props.id;
   const name = props.name;
   const position = props.position;
   const job_reqs = props.job_reqs;
@@ -74,7 +76,7 @@ function Prompt(props) {
         <div>
           <button
             onClick={(e) => {
-              navigate(edit, { state: {name, position, job_reqs}});
+              navigate(edit, { state: {id, name, position, job_reqs}});
               e.stopPropagation();
             }}
           >

@@ -12,6 +12,7 @@ function Edit() {
   const snackbarRef = useRef(null);
   const navigate = useNavigate();
   const view = "/view";
+  const id = location.state.id;
   const name = location.state.name;
   const position = location.state.position;
   const job_reqs = location.state.job_reqs;
@@ -20,6 +21,7 @@ function Edit() {
     position: position,
     job_requirements: job_reqs,
   });
+  console.log(id);
 
   async function displaySnackbar() {
     if (
