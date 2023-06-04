@@ -56,6 +56,7 @@ export async function updatePrompt(prompt_id, name, position, job_reqs)
         position: position,
         job_reqs: job_reqs
     }
+    console.log(data);
 
     try {
         const response = await fetch('http://localhost:4200/api/update-prompt', {

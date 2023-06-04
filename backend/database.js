@@ -80,7 +80,7 @@ var updatePrompt = async(prompt_id, name, position, job_reqs) => {
                 return true;
             }
             else {
-                console.log("prompt not updated!");
+                console.log("Prompt not updated!");
                 return false;
             }
         });

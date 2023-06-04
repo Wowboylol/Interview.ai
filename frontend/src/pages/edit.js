@@ -32,7 +32,7 @@ function Edit() {
       snackbarRef.current.show();
       console.log(snackbarRef.current);
     } else {
-      // updatePrompt(prompt.name, prompt.position, prompt.job_reqs);
+      updatePrompt(id, prompt.name, prompt.position, prompt.job_reqs);
       navigate(view);
     }
   }

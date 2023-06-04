@@ -82,7 +82,6 @@ app.get('/api/view-prompts', async (req,res) => {
     {
         var user_id = saved_session.id;
         var prompts = await db.getPrompts(user_id);
-        console.log(prompts);
         res.json(prompts);
     }
 });
@@ -92,13 +91,15 @@ app.put('/api/update-prompt', async (req,res) => {
     var name = req.body.name;
     var position = req.body.position;
     var job_reqs = req.body.job_reqs;
+
+    console.log(req.body);
     
     try {
         db.updatePrompt(prompt_id, name, position, job_reqs);
-        res.status(200).send("Prompt updated successfully");
+        res.status(200).send({message: "Prompt updated successfully"});
     }
     catch(error) {
-        res.status(500).send("Error updating prompt");
+        res.status(500).send({message: "Error updating prompt"});
     }
 });
 
