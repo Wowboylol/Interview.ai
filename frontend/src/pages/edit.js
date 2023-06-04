@@ -21,8 +21,6 @@ function Edit() {
     position: position,
     job_requirements: job_reqs,
   });
-  console.log(id);
-
   async function displaySnackbar() {
     if (
       prompt.name === "" ||
@@ -30,9 +28,8 @@ function Edit() {
       prompt.job_requirements === ""
     ) {
       snackbarRef.current.show();
-      console.log(snackbarRef.current);
     } else {
-      updatePrompt(id, prompt.name, prompt.position, prompt.job_reqs);
+      await updatePrompt(id, prompt.name, prompt.position, prompt.job_requirements);
       navigate(view);
     }
   }
