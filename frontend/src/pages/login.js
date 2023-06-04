@@ -3,6 +3,7 @@ import { loginAPI } from "../services/userService";
 
 function Login() {
   const [details, setDetails] = useState({ email: "", password: "" });
+  const [reveal, setReveal] = useState(false);
   async function login() {
     const data = await loginAPI(details);
     console.log(data["message"]);
@@ -63,6 +64,7 @@ function Login() {
                 ease-in-out
                 focus:border-accent focus:bg-white focus:text-gray-700 focus:outline-none
             "
+          type={"password"}
           value={details.password}
           onChange={(e) =>
             setDetails({
