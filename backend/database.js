@@ -73,7 +73,7 @@ var getPrompts = async (user_id) => {
 // Updates a prompt based on prompt_id
 // Returns true if successful, false otherwise
 var updatePrompt = async(prompt_id, name, position, job_reqs) => {
-    return await Prompt.updateOne({ _id: prompt_id }, { name: name }, { position: position }, { job_reqs: job_reqs }, { updatedAt: Date.now })
+    return await Prompt.updateOne({ _id: prompt_id }, { name, position, job_reqs, updatedAt: Date.now() })
         .then((result) => {
             if (result.modifiedCount > 0) {
                 console.log("Prompt updated!");

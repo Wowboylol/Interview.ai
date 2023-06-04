@@ -91,8 +91,6 @@ app.put('/api/update-prompt', async (req,res) => {
     var name = req.body.name;
     var position = req.body.position;
     var job_reqs = req.body.job_reqs;
-
-    console.log(req.body);
     
     try {
         db.updatePrompt(prompt_id, name, position, job_reqs);
