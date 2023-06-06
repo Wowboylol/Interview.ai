@@ -66,7 +66,7 @@ function Login() {
                 ease-in-out
                 focus:border-accent focus:bg-white focus:text-gray-700 focus:outline-none
             "
-            type="password"
+            type={reveal ? "text" : "password"}
             value={details.password}
             onChange={(e) =>
               setDetails({
@@ -78,7 +78,7 @@ function Login() {
           />
           <button
           onClick={() => setReveal(!reveal)}>
-            <BiShow size={20}/>
+            {reveal ? <BiHide size={20}/> : <BiShow size={20}/>}
           </button>
         </div>
       </div>
