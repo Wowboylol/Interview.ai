@@ -16,7 +16,7 @@ function Login() {
 
   return (
     <div className="flex min-h-screen flex-col items-center justify-center font-serif font-semibold gap-8">
-      <h1 className="text-3xl"> Enter your email and password to continue</h1>
+      <h1 className="text-3xl"> Login to Interview.ai</h1>
       <div>
         <div>
           <input
@@ -47,7 +47,7 @@ function Login() {
             placeholder="Email"
           />
         </div>
-        <div className="flex items-center space-x-1 pt-8">
+        <div className="flex items-center space-x-1 pt-4">
           <input
             className="
                 form-control
@@ -91,7 +91,7 @@ function Login() {
         Login
       </button>
       <p className="font-normal">
-        Don't have an account? <a href="/register"> <b>Sign up! </b></a>
+        Don't have an account? <a href="/register" className=" hover:underline"> <b> Sign up! </b></a>
       </p>
     </div>
   );
