@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { loginAPI } from "../services/userService";
+import { BiShow, BiHide } from "react-icons/bi";
 
 function Login() {
   const [details, setDetails] = useState({ email: "", password: "" });
@@ -17,12 +18,13 @@ function Login() {
     <div className="flex min-h-screen flex-col items-center justify-center font-serif font-semibold gap-8">
       <h1 className="text-3xl"> Enter your email and password to continue</h1>
       <div>
-        <input
-          className="
+        <div>
+          <input
+            className="
             form-control
             m-0
             block
-            w-full
+            w-50
             rounded
             border
             border-solid
@@ -35,19 +37,19 @@ function Login() {
             ease-in-out
             focus:border-accent focus:bg-white focus:text-gray-700 focus:outline-none
         "
-          value={details.email}
-          onChange={(e) =>
-            setDetails({
-              ...details,
-              email: e.target.value,
-            })
-          }
-          placeholder="Email"
-        />
-      </div>
-      <div>
-        <input
-          className="
+            value={details.email}
+            onChange={(e) =>
+              setDetails({
+                ...details,
+                email: e.target.value,
+              })
+            }
+            placeholder="Email"
+          />
+        </div>
+        <div className="flex items-center space-x-1 pt-8">
+          <input
+            className="
                 form-control
                 m-0
                 block
@@ -64,16 +66,21 @@ function Login() {
                 ease-in-out
                 focus:border-accent focus:bg-white focus:text-gray-700 focus:outline-none
             "
-          type={"password"}
-          value={details.password}
-          onChange={(e) =>
-            setDetails({
-              ...details,
-              password: e.target.value,
-            })
-          }
-          placeholder="Password"
-        />
+            type="password"
+            value={details.password}
+            onChange={(e) =>
+              setDetails({
+                ...details,
+                password: e.target.value,
+              })
+            }
+            placeholder="Password"
+          />
+          <button
+          onClick={() => setReveal(!reveal)}>
+            <BiShow size={20}/>
+          </button>
+        </div>
       </div>
       <button
         className="border-2 border-black rounded-full shadow hover:shadow-md hover:opacity-50 p-4 transition duration-500"
