@@ -90,6 +90,9 @@ function Login() {
       >
         Login
       </button>
+      <p className="font-normal">
+        Don't have an account? <a href="/register"> <b>Sign up! </b></a>
+      </p>
     </div>
   );
 }

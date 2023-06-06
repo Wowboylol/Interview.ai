@@ -6,6 +6,7 @@ import Practice from "./pages/practice";
 import Results from "./pages/results";
 import Login from "./pages/login";
 import Edit from "./pages/edit";
+import Register from "./pages/register";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           <Route path="/results" element={<Results />} />
           <Route path="/login" element={<Login />} />
           <Route path="/edit" element={<Edit />} />
+          <Route path="/register" element={<Register/>} />
         </Routes>
       </div>
     </div>
