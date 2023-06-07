@@ -53,6 +53,26 @@ app.post('/api/login', async (req,res) => {
     }
 });
 
+app.post('/api/register', async (req,res) => {
+    var email = req.body.email;
+    var password = req.body.password;
+
+    var user = await db.register(email, password);
+    if(!user) {
+        res.status(400).json({
+            message: "Invalid registration"
+        })
+    }
+    else if(user) {
+        req.session.user = {id: user._id, email: user.email};
+        saved_session = req.session.user;
+        console.log(saved_session);
+        res.status(200).json({
+            message: "Registration successful"
+        })
+    }
+});
+
 app.get('/api/profile', (req,res) => {
     console.log("Session user:" + JSON.stringify(saved_session));
     res.json(saved_session);

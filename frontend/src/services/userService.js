@@ -90,6 +90,23 @@ export async function loginAPI(data)
     }
 }
 
+export async function registerAPI(data)
+{
+    try {
+        const response = await fetch('http://localhost:4200/api/register', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data) 
+        })
+        return await response.json();
+    }
+    catch(err) {
+        console.log(err);
+    }
+}
+
 export async function checkSession()
 {
     try {

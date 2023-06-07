@@ -91,23 +91,23 @@ var userExists = async (email) => {
     return await User.findOne({email: email});
 }
 
-// This function is for testing purposes only
-// var addUser = async(email, password) => {
-//     var newUser = new User({
-//         email: email,
-//         password: md5(password)
-//     });
+// Register a new user to database and return true if successful, false otherwise
+var register = async(email, password) => {
+    var newUser = new User({
+        email: email,
+        password: md5(password)
+    });
     
-//     try {
-//         if(await userExists(email)) throw new Error("User already exists!");
-//         await newUser.save();
-//         return true;
-//     }
-//     catch(error) {
-//         console.log(error);
-//         return false;
-//     }
-// };
+    try {
+        if(await userExists(email)) throw new Error("User already exists!");
+        await newUser.save();
+        return true;
+    }
+    catch(error) {
+        console.log(error);
+        return false;
+    }
+};
 
 // addPrompt("646d66bd039d408348f0d1a8", "John", "Software Developer", "C++, Java, Python");
 // addPrompt("646d66bd039d408348f0d1a8", "Celene", "Full-stack Web Developer", "React, Node.js, MongoDB, Express.js");
@@ -124,5 +124,6 @@ module.exports = {
     login,
     addPrompt,
     getPrompts,
-    updatePrompt
+    updatePrompt,
+    register
 };
