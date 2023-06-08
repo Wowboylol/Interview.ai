@@ -1,17 +1,18 @@
 import { useState } from "react";
-import { loginAPI } from "../services/userService";
+import { registerAPI } from "../services/userService";
 import { BiShow, BiHide } from "react-icons/bi";
 
 function Register() {
   const [details, setDetails] = useState({ email: "", password: "" });
   const [reveal, setReveal] = useState(false);
   async function signup() {
-    const data = await loginAPI(details);
-    console.log(data["message"]);
+    const data = await registerAPI(details);
+    console.log(data);
+    // console.log(data["message"]);
 
-    if (data["message"] === "Login successful") {
-      window.location.href = "/";
-    }
+    // if (data["message"] === "Registration successful") {
+    //   window.location.href = "/";
+    // }
   }
 
   return (

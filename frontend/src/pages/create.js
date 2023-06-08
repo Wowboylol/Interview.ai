@@ -1,6 +1,6 @@
 import { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import { startInterview } from "../services/userService";
+import { startInterview, savePrompt } from "../services/userService";
 import Snackbar from "../components/snackbar";
 
 function Create() {
@@ -26,6 +26,7 @@ function Create() {
       snackbarRef.current.show();
     } else {
       const data = await startInterview(prompt);
+      await savePrompt(prompt);
       navigate(practice, { state: { data } });
     }
   }

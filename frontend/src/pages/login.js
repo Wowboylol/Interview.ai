@@ -7,8 +7,6 @@ function Login() {
   const [reveal, setReveal] = useState(false);
   async function login() {
     const data = await loginAPI(details);
-    console.log(data["message"]);
-
     if (data["message"] === "Login successful") {
       window.location.href = "/";
     }
