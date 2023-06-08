@@ -46,7 +46,6 @@ function Practice() {
   function nextQuestion() {
     setIndex(index + 1);
     responses.push(transcript);
-    console.log(responses);
     if (index === data.length - 1) {
       finished = true;
     }
