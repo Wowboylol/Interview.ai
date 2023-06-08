@@ -56,6 +56,9 @@ var addPrompt = async (user_id, name, position, job_reqs) => {
 
     try {
         await newPrompt.save();
+        console.log("Prompt added");
+        console.log(job_reqs);
+        console.log(position);
         return true;
     }
     catch(error) {

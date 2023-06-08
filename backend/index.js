@@ -82,7 +82,7 @@ app.post('/api/create-prompt', async (req,res) => {
     var user_id = saved_session.id;
     var name = req.body.name;
     var position = req.body.position;
-    var job_reqs = req.body.job_reqs;
+    var job_reqs = req.body.job_requirements;
     
     try {
         db.addPrompt(user_id, name, position, job_reqs);
