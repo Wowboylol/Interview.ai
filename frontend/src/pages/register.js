@@ -7,12 +7,9 @@ function Register() {
   const [reveal, setReveal] = useState(false);
   async function signup() {
     const data = await registerAPI(details);
-    console.log(data);
-    // console.log(data["message"]);
-
-    // if (data["message"] === "Registration successful") {
-    //   window.location.href = "/";
-    // }
+    if (data["message"] === "Registration successful") {
+      window.location.href = "/";
+    }
   }
 
   return (
