@@ -66,9 +66,8 @@ function Prompt(props) {
       onClick={() => goPractice(name, position, job_reqs)}
       className="m-4 flex flex-col rounded-xl border-2 p-4 text-left"
     >
-      <div className="h-4 w-full"></div>
-      <div className="flex">
-        <div>
+      <div className="flex w-full">
+        <div className="w-full">
           <i>{name}</i>
           <h1 className="text-2xl font-extrabold">{position}</h1>
           <div className="text-accent">Job requirements: {job_reqs}</div>
@@ -76,7 +75,7 @@ function Prompt(props) {
         <div>
           <button
             onClick={(e) => {
-              navigate(edit, { state: {id, name, position, job_reqs}});
+              navigate(edit, { state: { id, name, position, job_reqs } });
               e.stopPropagation();
             }}
           >
