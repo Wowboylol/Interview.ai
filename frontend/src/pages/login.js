@@ -1,14 +1,23 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { loginAPI } from "../services/userService";
 import { BiShow, BiHide } from "react-icons/bi";
+import Snackbar from "../components/snackbar";
 
 function Login() {
   const [details, setDetails] = useState({ email: "", password: "" });
   const [reveal, setReveal] = useState(false);
+  const SnackbarType = {
+    success: "success",
+    fail: "fail",
+  };
+  const snackbarRef = useRef(null);
+
   async function login() {
     const data = await loginAPI(details);
     if (data["message"] === "Login successful") {
       window.location.href = "/";
+    } else {
+      snackbarRef.current.show();
     }
   }
 
@@ -88,6 +97,11 @@ function Login() {
       >
         Login
       </button>
+      <Snackbar
+        ref={snackbarRef}
+        message="User not found!"
+        type={SnackbarType.fail}
+      />
       <p className="font-normal">
         Don't have an account? <a href="/register" className=" hover:underline"> <b> Sign up! </b></a>
       </p>
