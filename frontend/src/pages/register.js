@@ -1,14 +1,23 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { registerAPI } from "../services/userService";
 import { BiShow, BiHide } from "react-icons/bi";
+import Snackbar from "../components/snackbar";
 
 function Register() {
   const [details, setDetails] = useState({ email: "", password: "" });
   const [reveal, setReveal] = useState(false);
+  const SnackbarType = {
+    success: "success",
+    fail: "fail",
+  };
+  const snackbarRef = useRef(null);
+
   async function signup() {
     const data = await registerAPI(details);
     if (data["message"] === "Registration successful") {
       window.location.href = "/";
+    } else {
+      snackbarRef.current.show();
     }
   }
 
@@ -90,6 +99,11 @@ function Register() {
       >
         Sign up
       </button>
+      <Snackbar
+        ref={snackbarRef}
+        message="User already exists!"
+        type={SnackbarType.fail}
+      />
     </div>
   );
 }
