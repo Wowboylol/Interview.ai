@@ -64,6 +64,7 @@ function Prompt(props) {
 
   async function removePrompt(id) {
     await deletePrompt(id);
+    window.location.reload();
   }
 
   return (
