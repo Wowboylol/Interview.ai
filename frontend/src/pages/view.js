@@ -4,6 +4,7 @@ import { loadPrompt } from "../services/userService";
 import Loader from "../components/loader";
 import { startInterview } from "../services/userService";
 import { BiEdit } from "react-icons/bi";
+import { RiDeleteBinLine } from "react-icons/ri";
 
 function View() {
   const home = "/";
@@ -80,6 +81,13 @@ function Prompt(props) {
             }}
           >
             <BiEdit />
+          </button>
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+            }}
+          >
+            <RiDeleteBinLine />
           </button>
         </div>
       </div>
