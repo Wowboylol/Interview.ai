@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { loadPrompt } from "../services/userService";
+import { loadPrompt, deletePrompt } from "../services/userService";
 import Loader from "../components/loader";
 import { startInterview } from "../services/userService";
 import { BiEdit } from "react-icons/bi";
@@ -62,6 +62,10 @@ function Prompt(props) {
     navigate(practice, { state: { data } });
   }
 
+  async function removePrompt(id) {
+    await deletePrompt(id);
+  }
+
   return (
     <button
       onClick={() => goPractice(name, position, job_reqs)}
@@ -84,6 +88,7 @@ function Prompt(props) {
           </button>
           <button
             onClick={(e) => {
+              removePrompt(id);
               e.stopPropagation();
             }}
           >

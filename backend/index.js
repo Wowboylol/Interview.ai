@@ -121,6 +121,17 @@ app.put('/api/update-prompt', async (req,res) => {
     }
 });
 
+app.delete('/api/delete-prompt', async (req, res) => {
+    var prompt_id = req.body.prompt_id;
+    try {
+        db.deletePrompt(prompt_id);
+        res.status(200).send({message: "Prompt deleted successfully"});
+    }
+    catch(error) {
+        res.status(500).send({message: "Error deleting prompt"});
+    }
+})
+
 app.post('/api/start', async (req, res) => {
     console.log(req.body);
     ai.clearMemory();

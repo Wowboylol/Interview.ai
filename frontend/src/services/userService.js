@@ -72,6 +72,23 @@ export async function updatePrompt(prompt_id, name, position, job_reqs)
     }
 }
 
+export async function deletePrompt(prompt_id) 
+{
+    try {
+        const response = await fetch('http://localhost:4200/api/delete-prompt', {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({prompt_id})
+        })
+        return await response.json();
+    }
+    catch(err) {
+        console.log(err);
+    }
+}
+
 export async function loginAPI(data)
 {
     try {
