@@ -1,8 +1,7 @@
+require('dotenv').config();
 var md5 = require("md5");
 var mongoose = require("mongoose");
-mongoose.connect(
-  "mongodb+srv://CMPT354:DTCyXnms4EJ2QTm4@sfx-database.uug5hfr.mongodb.net/interview?retryWrites=true&w=majority"
-);
+mongoose.connect(process.env.MONGO);
 
 var db = mongoose.connection;
 db.on("error", console.error.bind(console, "connection error"));
