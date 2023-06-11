@@ -89,8 +89,10 @@ function Prompt(props) {
           </button>
           <button
             onClick={(e) => {
-              removePrompt(id);
-              e.stopPropagation();
+              if (window.confirm("Delete?")) {
+                removePrompt(id);
+                e.stopPropagation();
+              }
             }}
           >
             <RiDeleteBinLine />
