@@ -7,8 +7,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import Webcam from "react-webcam";
 import Loader from "../components/loader";
 
-// const appId = process.env.REACT_APP_SECRET;
-const appId = "7fd27f79-99ff-4484-879a-5b776ba182d1";
+const appId = process.env.REACT_APP_SECRET;
 const SpeechlySpeechRecognition = createSpeechlySpeechRecognition(appId);
 SpeechRecognition.applyPolyfill(SpeechlySpeechRecognition);
 const results = "/results";
