@@ -92,6 +92,8 @@ function Prompt(props) {
               if (window.confirm("Delete?")) {
                 removePrompt(id);
                 e.stopPropagation();
+              } else {
+                e.stopPropagation();
               }
             }}
           >
