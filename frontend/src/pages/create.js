@@ -135,7 +135,7 @@ function Create() {
           displaySnackbar();
         }}
       >
-        Create your prompt for your interview
+        Create prompt
       </button>
       <Snackbar
         ref={snackbarRef}
@@ -148,7 +148,7 @@ function Create() {
           navigate(home);
         }}
       >
-        Go back to the home page
+        Home page
       </button>
     </div>
   );

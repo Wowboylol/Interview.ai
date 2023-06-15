@@ -138,7 +138,7 @@ function Edit() {
           displaySnackbar();
         }}
       >
-        Click to edit your prompt
+        Edit prompt
       </button>
       <Snackbar
         ref={snackbarRef}
@@ -151,7 +151,7 @@ function Edit() {
           navigate(view);
         }}
       >
-        Go back to view your existing prompts
+        View prompts
       </button>
     </div>
   );

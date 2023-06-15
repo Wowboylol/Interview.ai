@@ -20,14 +20,14 @@ function View() {
 
   return (
     <div>
-      <div className="p-4">
+      <div className="p-4 font-serif">
         <div className="flex items-center justify-between">
           <h1 className="p-r py-10 px-4 text-3xl font-extrabold">
             Previous interview prompts
           </h1>
           <button
             onClick={() => navigate(home)}
-            className="border-2 border-black rounded-full shadow hover:shadow-md hover:opacity-50 p-4 transition duration-500"
+            className="border-2 border-black rounded-full shadow hover:shadow-md hover:opacity-50 p-4 transition duration-500 font-bold"
           >
             Home Page
           </button>
